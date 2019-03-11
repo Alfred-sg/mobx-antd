@@ -24,7 +24,7 @@ export default class Table {
   }
 
   @action
-  destory = () => {
+  reset = () => {
     this.init();
   }
 

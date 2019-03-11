@@ -6,12 +6,19 @@ import { KeyType, KeysType, KeyPropsType } from '../types';
  */
 export default class Key {
   @observable activeKey: KeyType = undefined;
+  @observable activeNode: Object = {};
   @observable activeKeys: KeysType = [];
+  @observable activeNodes: Object[] = [];
   @observable checkedKeys: KeysType = [];
+  @observable checkedNodes: Object[] = [];
   @observable expandedKeys: KeysType = [];
+  @observable expandedNodes: Object[] = [];
   @observable loadedKeys: KeysType = [];
+  @observable loadedNodes: Object[] = [];
   @observable selectedKeys: KeysType = [];
+  @observable selectedNodes: Object[] = [];
   @observable openKeys: KeysType = [];
+  @observable openNodes: Object[] = [];
 
   constructor(props?: KeyPropsType){
     this.init(props);
@@ -20,16 +27,23 @@ export default class Key {
   @action
   init(props?: KeyPropsType){
     this.setActiveKey(props && props.activeKey)
-      .setActiveKey(props ? props.activeKeys : [])
-      .setActiveKey(props ? props.checkedKeys : [])
-      .setActiveKey(props ? props.expandedKeys : [])
-      .setActiveKey(props ? props.loadedKeys : [])
-      .setActiveKey(props ? props.selectedKeys : [])
-      .setActiveKey(props ? props.openKeys : []);
+      .setActiveNode(props && props.activeNode || {})
+      .setActiveKey(props && props.activeKeys || [])
+      .setActiveNodes(props && props.activeNodes || [])
+      .setCheckedKeys(props && props.checkedKeys || [])
+      .setCheckedNodes(props && props.checkedNodes || [])
+      .setExpandedKeys(props && props.expandedKeys || [])
+      .setExpandedNodes(props && props.expandedNodes || [])
+      .setLoadedKeys(props && props.loadedKeys || [])
+      .setLoadedNodes(props && props.loadedNodes || [])
+      .setSelectedKeys(props && props.selectedKeys || [])
+      .setSelectedNodes(props && props.selectedNodes || [])
+      .setOpenKeys(props && props.openKeys || [])
+      .setOpenNodes(props && props.openNodes || []);
   }
 
   @action
-  destory(){
+  reset(){
     this.init();
   }
 
@@ -40,8 +54,20 @@ export default class Key {
   }
 
   @action
+  setActiveNode = (activeNode: Object) => {
+    this.activeNode = activeNode;
+    return this;
+  }
+
+  @action
   setActiveKeys = (activeKey: KeysType) => {
     this.activeKeys = activeKey;
+    return this;
+  }
+
+  @action
+  setActiveNodes = (activeNodes: Object []) => {
+    this.activeNodes = activeNodes;
     return this;
   }
 
@@ -52,8 +78,20 @@ export default class Key {
   }
 
   @action
+  setCheckedNodes = (checkedNodes: Object []) => {
+    this.checkedNodes = checkedNodes;
+    return this;
+  }
+
+  @action
   setExpandedKeys = (expandedKeys: KeysType) => {
     this.expandedKeys = expandedKeys;
+    return this;
+  }
+
+  @action
+  setExpandedNodes = (expandedNodes: Object []) => {
+    this.expandedNodes = expandedNodes;
     return this;
   }
 
@@ -64,14 +102,32 @@ export default class Key {
   }
 
   @action
+  setLoadedNodes = (loadedNodes: Object []) => {
+    this.loadedNodes = loadedNodes;
+    return this;
+  }
+
+  @action
   setSelectedKeys = (selectedKeys: KeysType) => {
     this.selectedKeys = selectedKeys;
     return this;
   }
 
   @action
+  setSelectedNodes = (selectedNodes: Object []) => {
+    this.selectedNodes = selectedNodes;
+    return this;
+  }
+
+  @action
   setOpenKeys = (openKeys: KeysType) => {
     this.openKeys = openKeys;
+    return this;
+  }
+
+  @action
+  setOpenNodes = (openNodes: Object []) => {
+    this.openNodes = openNodes;
     return this;
   }
 };

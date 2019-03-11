@@ -17,7 +17,7 @@ export default class Load {
   }
 
   @action
-  destory = () => {
+  reset = () => {
     this.setLoading(false);
   }
 

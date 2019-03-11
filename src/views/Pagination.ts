@@ -21,7 +21,7 @@ export default class Pagination {
   }
 
   @action
-  destory = () => {
+  reset = () => {
     this.init();
   }
 

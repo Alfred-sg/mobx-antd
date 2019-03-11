@@ -3,12 +3,19 @@ export type KeysType = number[] | string[];
 
 export type KeyPropsType = {
   activeKey?: KeyType,
+  activeNode?: Object,
   activeKeys?: KeysType,
+  activeNodes?: Object[],
   checkedKeys?: KeysType,
+  checkedNodes?: Object[],
   expandedKeys?: KeysType,
+  expandedNodes?: Object[],
   loadedKeys?: KeysType,
+  loadedNodes?: Object[],
   selectedKeys?: KeysType,
-  openKeys?: KeysType
+  selectedNodes?: Object[],
+  openKeys?: KeysType,
+  openNodes?: Object[]
 };
 
 export type VisiblePropsType = {

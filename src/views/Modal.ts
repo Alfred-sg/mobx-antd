@@ -7,6 +7,7 @@ import Form from './Form';
  */
 export default class Modal {
   @observable visible: boolean = false;
+  @observable dataSource: Object = {};
   @observable form = new Form();
 
   constructor(props?: ModalPropsType){
@@ -26,21 +27,23 @@ export default class Modal {
   }
 
   @action
-  destory = () => {
+  reset = () => {
     this.visible = false;
     this.form.init();
   }
 
   @action
-  show = () => {
+  show = (dataSource: Object, transform: (data: Object) => {}) => {
     this.visible = true;
+    this.dataSource = dataSource;
+    const data = transform ? transform(dataSource) : dataSource;
+    this.form.resetFields().setFieldsValue(data);
     return this;
   }
 
   @action
   hide = () => {
     this.visible = false;
-    console.log(this.visible)
     return this;
   }
 

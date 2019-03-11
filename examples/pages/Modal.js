@@ -10,7 +10,7 @@ import { observer, inject } from 'mobx-react';
     props.modal.form.setFields(changedFields);
   },
   mapPropsToFields(props) {
-    const { fields: fieldsStore } = props.modal.form;
+    const { fields: fieldsStore } = props.modal;// 由 modal 更新的数据没法驱动视图重绘
     let fields = {};
     Object.keys(fieldsStore).map(fieldName => {
       fields[fieldName] = Form.createFormField(fieldsStore[fieldName])
@@ -29,14 +29,22 @@ export default class BasicModal extends React.Component {
     modal.hide();
   }
 
+  editModal = () => {
+    const { modal, form } = this.props;
+    modal.show({title: 'test'});
+    const values = { ...modal.values };// 或者将 Button 移出组件，或者保存 values 副本
+    form.resetFields();
+    form.setFieldsValue(values);
+  }
+
 
   render() {
     const { modal, form: { getFieldDecorator } } = this.props;
 
     return (
       <div>
-        <Button type="primary" onClick={modal.show}>
-          Open Modal
+        <Button type="primary" onClick={this.editModal}>
+          Edit Modal
         </Button>
         <Modal
           title="Basic Modal"

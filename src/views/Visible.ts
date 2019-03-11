@@ -17,7 +17,7 @@ export default class Visible {
   }
 
   @action
-  destory = () => {
+  reset = () => {
     this.setVisible(false);
   }
 

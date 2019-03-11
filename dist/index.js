@@ -853,7 +853,7 @@ function () {
       _this.setFieldsValue(values);
     };
 
-    this.destory = function () {
+    this.reset = function () {
       _this.resetFields();
     };
 
@@ -947,7 +947,7 @@ __decorate([_mobx.observable], Form.prototype, "fields", void 0);
 
 __decorate([_mobx.action], Form.prototype, "init", void 0);
 
-__decorate([_mobx.action], Form.prototype, "destory", void 0);
+__decorate([_mobx.action], Form.prototype, "reset", void 0);
 
 __decorate([_mobx.action], Form.prototype, "setFields", void 0);
 
@@ -1265,7 +1265,7 @@ var Pagination = function Pagination(props) {
     _this.setCurrent(props ? props.current : 1).setPageSize(props ? props.pageSize : 10).setTotal(props ? props.total : 0);
   };
 
-  this.destory = function () {
+  this.reset = function () {
     _this.init();
   };
 
@@ -1297,7 +1297,7 @@ __decorate([_mobx.observable], Pagination.prototype, "total", void 0);
 
 __decorate([_mobx.action], Pagination.prototype, "init", void 0);
 
-__decorate([_mobx.action], Pagination.prototype, "destory", void 0);
+__decorate([_mobx.action], Pagination.prototype, "reset", void 0);
 
 __decorate([_mobx.action], Pagination.prototype, "setCurrent", void 0);
 
@@ -1394,7 +1394,7 @@ var Visible = function Visible(props) {
     _this.setVisible(props && props.visible || false);
   };
 
-  this.destory = function () {
+  this.reset = function () {
     _this.setVisible(false);
   };
 
@@ -1424,7 +1424,7 @@ __decorate([_mobx.observable], Visible.prototype, "visible", void 0);
 
 __decorate([_mobx.action], Visible.prototype, "init", void 0);
 
-__decorate([_mobx.action], Visible.prototype, "destory", void 0);
+__decorate([_mobx.action], Visible.prototype, "reset", void 0);
 
 __decorate([_mobx.action], Visible.prototype, "setVisible", void 0);
 
@@ -1556,7 +1556,7 @@ var Load = function Load(props) {
     _this.setLoading(props && props.loading || false);
   };
 
-  this.destory = function () {
+  this.reset = function () {
     _this.setLoading(false);
   };
 
@@ -1573,7 +1573,7 @@ __decorate([_mobx.observable], Load.prototype, "loading", void 0);
 
 __decorate([_mobx.action], Load.prototype, "init", void 0);
 
-__decorate([_mobx.action], Load.prototype, "destory", void 0);
+__decorate([_mobx.action], Load.prototype, "reset", void 0);
 
 __decorate([_mobx.action], Load.prototype, "setLoading", void 0);
 
@@ -1617,15 +1617,27 @@ function () {
     var _this = this;
 
     this.activeKey = undefined;
+    this.activeNode = {};
     this.activeKeys = [];
+    this.activeNodes = [];
     this.checkedKeys = [];
+    this.checkedNodes = [];
     this.expandedKeys = [];
+    this.expandedNodes = [];
     this.loadedKeys = [];
+    this.loadedNodes = [];
     this.selectedKeys = [];
+    this.selectedNodes = [];
     this.openKeys = [];
+    this.openNodes = [];
 
     this.setActiveKey = function (activeKey) {
       _this.activeKey = activeKey;
+      return _this;
+    };
+
+    this.setActiveNode = function (activeNode) {
+      _this.activeNode = activeNode;
       return _this;
     };
 
@@ -1634,8 +1646,18 @@ function () {
       return _this;
     };
 
+    this.setActiveNodes = function (activeNodes) {
+      _this.activeNodes = activeNodes;
+      return _this;
+    };
+
     this.setCheckedKeys = function (checkedKeys) {
       _this.checkedKeys = checkedKeys;
+      return _this;
+    };
+
+    this.setCheckedNodes = function (checkedNodes) {
+      _this.checkedNodes = checkedNodes;
       return _this;
     };
 
@@ -1644,8 +1666,18 @@ function () {
       return _this;
     };
 
+    this.setExpandedNodes = function (expandedNodes) {
+      _this.expandedNodes = expandedNodes;
+      return _this;
+    };
+
     this.setLoadedKeys = function (loadedKeys) {
       _this.loadedKeys = loadedKeys;
+      return _this;
+    };
+
+    this.setLoadedNodes = function (loadedNodes) {
+      _this.loadedNodes = loadedNodes;
       return _this;
     };
 
@@ -1654,8 +1686,18 @@ function () {
       return _this;
     };
 
+    this.setSelectedNodes = function (selectedNodes) {
+      _this.selectedNodes = selectedNodes;
+      return _this;
+    };
+
     this.setOpenKeys = function (openKeys) {
       _this.openKeys = openKeys;
+      return _this;
+    };
+
+    this.setOpenNodes = function (openNodes) {
+      _this.openNodes = openNodes;
       return _this;
     };
 
@@ -1665,10 +1707,10 @@ function () {
   var _proto = Key.prototype;
 
   _proto.init = function init(props) {
-    this.setActiveKey(props && props.activeKey).setActiveKey(props ? props.activeKeys : []).setActiveKey(props ? props.checkedKeys : []).setActiveKey(props ? props.expandedKeys : []).setActiveKey(props ? props.loadedKeys : []).setActiveKey(props ? props.selectedKeys : []).setActiveKey(props ? props.openKeys : []);
+    this.setActiveKey(props && props.activeKey).setActiveNode(props && props.activeNode || {}).setActiveKey(props && props.activeKeys || []).setActiveNodes(props && props.activeNodes || []).setCheckedKeys(props && props.checkedKeys || []).setCheckedNodes(props && props.checkedNodes || []).setExpandedKeys(props && props.expandedKeys || []).setExpandedNodes(props && props.expandedNodes || []).setLoadedKeys(props && props.loadedKeys || []).setLoadedNodes(props && props.loadedNodes || []).setSelectedKeys(props && props.selectedKeys || []).setSelectedNodes(props && props.selectedNodes || []).setOpenKeys(props && props.openKeys || []).setOpenNodes(props && props.openNodes || []);
   };
 
-  _proto.destory = function destory() {
+  _proto.reset = function reset() {
     this.init();
   };
 
@@ -1679,35 +1721,63 @@ exports.default = Key;
 
 __decorate([_mobx.observable], Key.prototype, "activeKey", void 0);
 
+__decorate([_mobx.observable], Key.prototype, "activeNode", void 0);
+
 __decorate([_mobx.observable], Key.prototype, "activeKeys", void 0);
+
+__decorate([_mobx.observable], Key.prototype, "activeNodes", void 0);
 
 __decorate([_mobx.observable], Key.prototype, "checkedKeys", void 0);
 
+__decorate([_mobx.observable], Key.prototype, "checkedNodes", void 0);
+
 __decorate([_mobx.observable], Key.prototype, "expandedKeys", void 0);
+
+__decorate([_mobx.observable], Key.prototype, "expandedNodes", void 0);
 
 __decorate([_mobx.observable], Key.prototype, "loadedKeys", void 0);
 
+__decorate([_mobx.observable], Key.prototype, "loadedNodes", void 0);
+
 __decorate([_mobx.observable], Key.prototype, "selectedKeys", void 0);
+
+__decorate([_mobx.observable], Key.prototype, "selectedNodes", void 0);
 
 __decorate([_mobx.observable], Key.prototype, "openKeys", void 0);
 
+__decorate([_mobx.observable], Key.prototype, "openNodes", void 0);
+
 __decorate([_mobx.action], Key.prototype, "init", null);
 
-__decorate([_mobx.action], Key.prototype, "destory", null);
+__decorate([_mobx.action], Key.prototype, "reset", null);
 
 __decorate([_mobx.action], Key.prototype, "setActiveKey", void 0);
 
+__decorate([_mobx.action], Key.prototype, "setActiveNode", void 0);
+
 __decorate([_mobx.action], Key.prototype, "setActiveKeys", void 0);
+
+__decorate([_mobx.action], Key.prototype, "setActiveNodes", void 0);
 
 __decorate([_mobx.action], Key.prototype, "setCheckedKeys", void 0);
 
+__decorate([_mobx.action], Key.prototype, "setCheckedNodes", void 0);
+
 __decorate([_mobx.action], Key.prototype, "setExpandedKeys", void 0);
+
+__decorate([_mobx.action], Key.prototype, "setExpandedNodes", void 0);
 
 __decorate([_mobx.action], Key.prototype, "setLoadedKeys", void 0);
 
+__decorate([_mobx.action], Key.prototype, "setLoadedNodes", void 0);
+
 __decorate([_mobx.action], Key.prototype, "setSelectedKeys", void 0);
 
+__decorate([_mobx.action], Key.prototype, "setSelectedNodes", void 0);
+
 __decorate([_mobx.action], Key.prototype, "setOpenKeys", void 0);
+
+__decorate([_mobx.action], Key.prototype, "setOpenNodes", void 0);
 
 ;
 module.exports = exports.default;
@@ -1752,7 +1822,7 @@ var Field = function Field(value) {
     _this.setValue(value);
   };
 
-  this.destory = function () {
+  this.reset = function () {
     _this.setValue();
   };
 
@@ -1770,7 +1840,7 @@ __decorate([_mobx.observable], Field.prototype, "value", void 0);
 
 __decorate([_mobx.action], Field.prototype, "init", void 0);
 
-__decorate([_mobx.action], Field.prototype, "destory", void 0);
+__decorate([_mobx.action], Field.prototype, "reset", void 0);
 
 __decorate([_mobx.action], Field.prototype, "setValue", void 0);
 
@@ -2421,6 +2491,7 @@ function () {
     var _this = this;
 
     this.visible = false;
+    this.dataSource = {};
     this.form = new _Form.default();
 
     this.init = function (props) {
@@ -2438,20 +2509,24 @@ function () {
       }
     };
 
-    this.destory = function () {
+    this.reset = function () {
       _this.visible = false;
 
       _this.form.init();
     };
 
-    this.show = function () {
+    this.show = function (dataSource, transform) {
       _this.visible = true;
+      _this.dataSource = dataSource;
+      var data = transform ? transform(dataSource) : dataSource;
+
+      _this.form.resetFields().setFieldsValue(data);
+
       return _this;
     };
 
     this.hide = function () {
       _this.visible = false;
-      console.log(_this.visible);
       return _this;
     };
 
@@ -2514,11 +2589,13 @@ exports.default = Modal;
 
 __decorate([_mobx.observable], Modal.prototype, "visible", void 0);
 
+__decorate([_mobx.observable], Modal.prototype, "dataSource", void 0);
+
 __decorate([_mobx.observable], Modal.prototype, "form", void 0);
 
 __decorate([_mobx.action], Modal.prototype, "init", void 0);
 
-__decorate([_mobx.action], Modal.prototype, "destory", void 0);
+__decorate([_mobx.action], Modal.prototype, "reset", void 0);
 
 __decorate([_mobx.action], Modal.prototype, "show", void 0);
 
@@ -3070,7 +3147,7 @@ var Table = function Table(props) {
     _this.setExpandedRowKeys(props && props.expandedRowKeys || []).setPagination(props && props.pagination || undefined).setFilters(props && props.filters || {}).setSorter(props && props.sorter || {});
   };
 
-  this.destory = function () {
+  this.reset = function () {
     _this.init();
   };
 
@@ -3110,7 +3187,7 @@ __decorate([_mobx.observable], Table.prototype, "sorter", void 0);
 
 __decorate([_mobx.action], Table.prototype, "init", void 0);
 
-__decorate([_mobx.action], Table.prototype, "destory", void 0);
+__decorate([_mobx.action], Table.prototype, "reset", void 0);
 
 __decorate([_mobx.action], Table.prototype, "setExpandedRowKeys", void 0);
 

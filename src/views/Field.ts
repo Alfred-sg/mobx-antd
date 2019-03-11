@@ -16,7 +16,7 @@ export default class Field {
   }
 
   @action
-  destory = () => {
+  reset = () => {
     this.setValue();
   }
 

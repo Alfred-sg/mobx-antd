@@ -17,7 +17,7 @@ export default class Form {
   }
 
   @action
-  destory = () => {
+  reset = () => {
     this.resetFields();
   }
 

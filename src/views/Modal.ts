@@ -33,10 +33,10 @@ export default class Modal {
   }
 
   @action
-  show = (dataSource: Object, transform: (data: Object) => {}) => {
+  show = (dataSource?: Object, transform?: (data?: Object) => {}) => {
     this.visible = true;
-    this.dataSource = dataSource;
-    const data = transform ? transform(dataSource) : dataSource;
+    this.dataSource = dataSource || {};
+    const data = transform ? transform(dataSource || {}) : dataSource;
     this.form.resetFields().setFieldsValue(data);
     return this;
   }
@@ -44,6 +44,8 @@ export default class Modal {
   @action
   hide = () => {
     this.visible = false;
+    this.dataSource = {};
+    this.form.resetFields();
     return this;
   }
 

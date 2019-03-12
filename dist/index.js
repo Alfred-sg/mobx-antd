@@ -1617,27 +1617,15 @@ function () {
     var _this = this;
 
     this.activeKey = undefined;
-    this.activeNode = {};
     this.activeKeys = [];
-    this.activeNodes = [];
     this.checkedKeys = [];
-    this.checkedNodes = [];
     this.expandedKeys = [];
-    this.expandedNodes = [];
     this.loadedKeys = [];
-    this.loadedNodes = [];
     this.selectedKeys = [];
-    this.selectedNodes = [];
     this.openKeys = [];
-    this.openNodes = [];
 
     this.setActiveKey = function (activeKey) {
       _this.activeKey = activeKey;
-      return _this;
-    };
-
-    this.setActiveNode = function (activeNode) {
-      _this.activeNode = activeNode;
       return _this;
     };
 
@@ -1646,18 +1634,8 @@ function () {
       return _this;
     };
 
-    this.setActiveNodes = function (activeNodes) {
-      _this.activeNodes = activeNodes;
-      return _this;
-    };
-
     this.setCheckedKeys = function (checkedKeys) {
       _this.checkedKeys = checkedKeys;
-      return _this;
-    };
-
-    this.setCheckedNodes = function (checkedNodes) {
-      _this.checkedNodes = checkedNodes;
       return _this;
     };
 
@@ -1666,18 +1644,8 @@ function () {
       return _this;
     };
 
-    this.setExpandedNodes = function (expandedNodes) {
-      _this.expandedNodes = expandedNodes;
-      return _this;
-    };
-
     this.setLoadedKeys = function (loadedKeys) {
       _this.loadedKeys = loadedKeys;
-      return _this;
-    };
-
-    this.setLoadedNodes = function (loadedNodes) {
-      _this.loadedNodes = loadedNodes;
       return _this;
     };
 
@@ -1686,18 +1654,8 @@ function () {
       return _this;
     };
 
-    this.setSelectedNodes = function (selectedNodes) {
-      _this.selectedNodes = selectedNodes;
-      return _this;
-    };
-
     this.setOpenKeys = function (openKeys) {
       _this.openKeys = openKeys;
-      return _this;
-    };
-
-    this.setOpenNodes = function (openNodes) {
-      _this.openNodes = openNodes;
       return _this;
     };
 
@@ -1707,7 +1665,7 @@ function () {
   var _proto = Key.prototype;
 
   _proto.init = function init(props) {
-    this.setActiveKey(props && props.activeKey).setActiveNode(props && props.activeNode || {}).setActiveKey(props && props.activeKeys || []).setActiveNodes(props && props.activeNodes || []).setCheckedKeys(props && props.checkedKeys || []).setCheckedNodes(props && props.checkedNodes || []).setExpandedKeys(props && props.expandedKeys || []).setExpandedNodes(props && props.expandedNodes || []).setLoadedKeys(props && props.loadedKeys || []).setLoadedNodes(props && props.loadedNodes || []).setSelectedKeys(props && props.selectedKeys || []).setSelectedNodes(props && props.selectedNodes || []).setOpenKeys(props && props.openKeys || []).setOpenNodes(props && props.openNodes || []);
+    this.setActiveKey(props && props.activeKey).setActiveKey(props && props.activeKeys || []).setCheckedKeys(props && props.checkedKeys || []).setExpandedKeys(props && props.expandedKeys || []).setLoadedKeys(props && props.loadedKeys || []).setSelectedKeys(props && props.selectedKeys || []).setOpenKeys(props && props.openKeys || []);
   };
 
   _proto.reset = function reset() {
@@ -1721,31 +1679,17 @@ exports.default = Key;
 
 __decorate([_mobx.observable], Key.prototype, "activeKey", void 0);
 
-__decorate([_mobx.observable], Key.prototype, "activeNode", void 0);
-
 __decorate([_mobx.observable], Key.prototype, "activeKeys", void 0);
-
-__decorate([_mobx.observable], Key.prototype, "activeNodes", void 0);
 
 __decorate([_mobx.observable], Key.prototype, "checkedKeys", void 0);
 
-__decorate([_mobx.observable], Key.prototype, "checkedNodes", void 0);
-
 __decorate([_mobx.observable], Key.prototype, "expandedKeys", void 0);
-
-__decorate([_mobx.observable], Key.prototype, "expandedNodes", void 0);
 
 __decorate([_mobx.observable], Key.prototype, "loadedKeys", void 0);
 
-__decorate([_mobx.observable], Key.prototype, "loadedNodes", void 0);
-
 __decorate([_mobx.observable], Key.prototype, "selectedKeys", void 0);
 
-__decorate([_mobx.observable], Key.prototype, "selectedNodes", void 0);
-
 __decorate([_mobx.observable], Key.prototype, "openKeys", void 0);
-
-__decorate([_mobx.observable], Key.prototype, "openNodes", void 0);
 
 __decorate([_mobx.action], Key.prototype, "init", null);
 
@@ -1753,31 +1697,17 @@ __decorate([_mobx.action], Key.prototype, "reset", null);
 
 __decorate([_mobx.action], Key.prototype, "setActiveKey", void 0);
 
-__decorate([_mobx.action], Key.prototype, "setActiveNode", void 0);
-
 __decorate([_mobx.action], Key.prototype, "setActiveKeys", void 0);
-
-__decorate([_mobx.action], Key.prototype, "setActiveNodes", void 0);
 
 __decorate([_mobx.action], Key.prototype, "setCheckedKeys", void 0);
 
-__decorate([_mobx.action], Key.prototype, "setCheckedNodes", void 0);
-
 __decorate([_mobx.action], Key.prototype, "setExpandedKeys", void 0);
-
-__decorate([_mobx.action], Key.prototype, "setExpandedNodes", void 0);
 
 __decorate([_mobx.action], Key.prototype, "setLoadedKeys", void 0);
 
-__decorate([_mobx.action], Key.prototype, "setLoadedNodes", void 0);
-
 __decorate([_mobx.action], Key.prototype, "setSelectedKeys", void 0);
 
-__decorate([_mobx.action], Key.prototype, "setSelectedNodes", void 0);
-
 __decorate([_mobx.action], Key.prototype, "setOpenKeys", void 0);
-
-__decorate([_mobx.action], Key.prototype, "setOpenNodes", void 0);
 
 ;
 module.exports = exports.default;
@@ -2517,8 +2447,8 @@ function () {
 
     this.show = function (dataSource, transform) {
       _this.visible = true;
-      _this.dataSource = dataSource;
-      var data = transform ? transform(dataSource) : dataSource;
+      _this.dataSource = dataSource || {};
+      var data = transform ? transform(dataSource || {}) : dataSource;
 
       _this.form.resetFields().setFieldsValue(data);
 
@@ -2527,6 +2457,10 @@ function () {
 
     this.hide = function () {
       _this.visible = false;
+      _this.dataSource = {};
+
+      _this.form.resetFields();
+
       return _this;
     };
 
